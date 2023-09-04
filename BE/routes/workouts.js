@@ -1,5 +1,8 @@
 const express = require('express');
 const {
+  checkId,
+} = require('./index');
+const {
   index,
   create,
   get,
@@ -9,19 +12,10 @@ const {
 
 const router = express.Router();
 
-// Workout / Index
-router.get('/', index);
-
-// Workout / Get
-router.get('/:id', get);
-
-// Workout / Create
-router.post('/', create);
-
-// Workout / Delete
-router.delete('/:id', destroy);
-
-// Workout / Update
-router.patch('/:id', update);
+router.get('/', index);                   // Index
+router.get('/:id', checkId, get);         // Get
+router.post('/', create);                 // Create
+router.delete('/:id', checkId, destroy);  // Delete
+router.patch('/:id', checkId, update);    // Update
 
 module.exports = router;
